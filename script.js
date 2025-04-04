@@ -1,15 +1,24 @@
 
 
 let task = localStorage.getItem('task') ? JSON.parse(localStorage.getItem('task')) : []
-let resultElement = document.getElementById('result')
+let resultElement = document.querySelector('#result')
 
 function renderTask(array) {
     resultElement.innerHTML = ""
-    array.forEach((item, index) => {
-        resultElement.innerHTML += `<div>
-            <h1><input type="checkbox" onChange="toggleComplete(${item["id"]})" ${item["isCompleted"] ? "checked" : ""} >${item["name"]} ${item["isCompleted"] ? "- Completed" : ""}</h1>
-            <button onClick="deleteTask(${item["id"]})">Delete</button>
-        </div>`
+    array.forEach((item) => {
+        let divElement = document.createElement('div')
+        divElement.innerHTML += `<h1><input type="checkbox" ${item["isCompleted"] ? "checked" : ""} >${item["name"]} ${item["isCompleted"] ? "- Completed" : ""}</h1>
+            <button>Delete</button>`
+
+        divElement.querySelector('input').addEventListener('change', () => {
+            toggleComplete(item["id"])
+        })
+
+        divElement.querySelector('button').addEventListener('click', () => {
+            deleteTask(item["id"])
+        })
+
+        resultElement.appendChild(divElement)
     })
 }
 
