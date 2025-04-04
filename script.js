@@ -56,3 +56,4 @@ function toggleComplete(taskId) {
     localStorage.setItem('task', JSON.stringify(task))
     renderTask(task)
 }
+
