@@ -8,25 +8,26 @@ function renderTask(array) {
     resultElement.innerHTML = ""
     array.forEach((item, index) => {
         resultElement.innerHTML += `<div>
-            <h1>${item}</h1>
-            <button onClick="deleteTask(${index})">Delete</button>
+            <h1><input type="checkbox" onChange="toggleComplete(${index})" ${item["isCompleted"] ? "checked" : ""} >${item["name"]} ${item["isCompleted"] ? "- Completed" : ""}</h1>
+            <button onClick="deleteTask(${item["id"]})">Delete</button>
         </div>`
     })
 }
 
 document.getElementById('addBtn').addEventListener('click', () => {
     let value = document.getElementById('taskInput').value.trim()
+    let obj = {id: Date.now(), name: value, isCompleted: false}
     if (value === "") {
         alert("Please enter a task")
         return
     }
-    task.push(value)
+    task.push(obj)
     renderTask(task)
     document.getElementById('taskInput').value = ''
 })
 
-function deleteTask(index) {
-    task.splice(index, 1)
+function deleteTask(taskId) {
+    task = task.filter(item => item["id"] != taskId)
     renderTask(task)
 }
 
@@ -34,8 +35,21 @@ document.getElementById('searchInput').addEventListener('keyup', () => {
     let searchKey = document.getElementById('searchInput').value.trim().toLowerCase()
 
     let searchResult = task.filter( (item) => {
-        return item.includes(searchKey)
+        return item["name"].includes(searchKey)
     } )
 
     renderTask(searchResult)
 })
+
+function toggleComplete(index) {
+    task.map((item, position) => {
+        if (index === position) {
+            item["isCompleted"] = !item["isCompleted"]
+            return item
+        } else {
+            return item
+        }
+    })
+
+    renderTask(task)
+}
