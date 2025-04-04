@@ -1,7 +1,6 @@
 
-// user can update task as completed and undone
 
-let task = []
+let task = localStorage.getItem('task') ? JSON.parse(localStorage.getItem('task')) : []
 let resultElement = document.getElementById('result')
 
 function renderTask(array) {
@@ -13,6 +12,8 @@ function renderTask(array) {
         </div>`
     })
 }
+
+renderTask(task)
 
 document.getElementById('addBtn').addEventListener('click', () => {
     let value = document.getElementById('taskInput').value.trim()
@@ -37,7 +38,7 @@ document.getElementById('searchInput').addEventListener('keyup', () => {
     let searchKey = document.getElementById('searchInput').value.trim().toLowerCase()
 
     let searchResult = task.filter( (item) => {
-        return item["name"].includes(searchKey)
+        return item["name"].toLowerCase().includes(searchKey)
     } )
 
     renderTask(searchResult)
