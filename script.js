@@ -8,7 +8,7 @@ function renderTask(array) {
     resultElement.innerHTML = ""
     array.forEach((item, index) => {
         resultElement.innerHTML += `<div>
-            <h1><input type="checkbox" onChange="toggleComplete(${index})" ${item["isCompleted"] ? "checked" : ""} >${item["name"]} ${item["isCompleted"] ? "- Completed" : ""}</h1>
+            <h1><input type="checkbox" onChange="toggleComplete(${item["id"]})" ${item["isCompleted"] ? "checked" : ""} >${item["name"]} ${item["isCompleted"] ? "- Completed" : ""}</h1>
             <button onClick="deleteTask(${item["id"]})">Delete</button>
         </div>`
     })
@@ -41,9 +41,9 @@ document.getElementById('searchInput').addEventListener('keyup', () => {
     renderTask(searchResult)
 })
 
-function toggleComplete(index) {
-    task.map((item, position) => {
-        if (index === position) {
+function toggleComplete(taskId) {
+    task.map((item) => {
+        if (item["id"] == taskId) {
             item["isCompleted"] = !item["isCompleted"]
             return item
         } else {
