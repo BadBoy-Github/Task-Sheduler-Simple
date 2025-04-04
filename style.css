@@ -1,0 +1,148 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Input and Button Styles */
+input[type="text"] {
+    width: 70%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #5c9ead;
+    box-shadow: 0 0 5px rgba(92, 158, 173, 0.3);
+}
+
+button {
+    padding: 12px 20px;
+    margin-left: 10px;
+    background-color: #5c9ead;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4a8a9a;
+}
+
+#addBtn {
+    background-color: #5c9ead;
+}
+
+#addBtn:hover {
+    background-color: #4a8a9a;
+}
+
+/* Task List Styles */
+#result {
+    margin-top: 30px;
+}
+
+#result div {
+    background: white;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+#result div:hover {
+    transform: translateY(-2px);
+}
+
+#result h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+}
+
+#result input[type="checkbox"] {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+#result button {
+    background-color: #e74c3c;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+#result button:hover {
+    background-color: #c0392b;
+}
+
+/* Completed Task Style */
+#result h1 input[type="checkbox"]:checked~span {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    input[type="text"] {
+        width: 60%;
+    }
+
+    #taskInput,
+    #searchInput {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    #result div {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #result button {
+        margin-top: 10px;
+        align-self: flex-end;
+    }
+}
+
+/* Animation for adding tasks */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#result div {
+    animation: fadeIn 0.3s ease-out;
+}
