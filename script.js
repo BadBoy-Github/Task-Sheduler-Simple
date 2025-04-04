@@ -22,12 +22,14 @@ document.getElementById('addBtn').addEventListener('click', () => {
         return
     }
     task.push(obj)
+    localStorage.setItem('task', JSON.stringify(task))
     renderTask(task)
     document.getElementById('taskInput').value = ''
 })
 
 function deleteTask(taskId) {
     task = task.filter(item => item["id"] != taskId)
+    localStorage.setItem('task', JSON.stringify(task))
     renderTask(task)
 }
 
@@ -50,6 +52,6 @@ function toggleComplete(taskId) {
             return item
         }
     })
-
+    localStorage.setItem('task', JSON.stringify(task))
     renderTask(task)
 }
